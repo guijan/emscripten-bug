@@ -1,0 +1,15 @@
+name: test
+on: [push]
+
+jobs:
+  emscripten:
+    runs-on: macos-latest
+    steps:
+      - name: setup
+        run: brew install emscripten
+      - uses: actions/checkout@v2.4.0
+      - name: test
+        run: |
+          emcc -v
+          emcc -v -o test test.c
+          node test
